@@ -1,5 +1,47 @@
 Todo
 
-- ask for data range (formated)
-- ask for selection of calandars 9
-- get data from selection of calandars
+
+- write up possible solutions
+- write test cases 
+- implement (dateRange, busyTimes) => freeTimes
+
+timeFrame:{
+	start: time
+	end:   time
+}
+
+busyTimes:[...dateRanges]
+
+freeTimes: [...dateRanges]
+
+
+dataRange, timeFrame, unit => dateArray
+
+a.map((v,i)=>{return a[i] || b[i]});
+
+dateArray, timeFrame*, unit** => dateRange
+
+
+initalize array of size durraction/unit
+trim b
+offset = differnce between start times /unit
+for i = offset; i<b.durration/unit i++
+	arr[i] = 1
+
+
+
+[].reduce
+
+
+
+
+
+
+
+
+
+
+
+
+
+
