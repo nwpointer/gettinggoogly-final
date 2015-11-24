@@ -21,7 +21,7 @@ function braket(size, span, offset, v){
 	var v = v || 0
 	var offset = offset || 0;
 	var arr =[];
-	
+
 	for(var i=0; i<size; i++){
 		arr[i] = i<offset || i>span+offset-1 ?  0 : v
 	}
@@ -53,6 +53,7 @@ function calculateFreeTimes(range, busy){
 	free.unshift(1)
 	free.push(1)
 
+	// console.log(free)
 
 	// 02: convert to moments
 	// push busies on either end to avoid this mess:
@@ -82,4 +83,14 @@ function rangeFormat(times){
 		return c
 	})
 	return ranges
+}
+
+
+if (typeof module !== 'undefined' && module.exports) {
+	// if executing on the node runtime, export...
+	module.exports.calculate = calculateFreeTimes
+	module.exports.rangeFormat = rangeFormat
+	module.exports.length = length
+	module.exports.braket = braket
+	module.exports.OR = OR
 }

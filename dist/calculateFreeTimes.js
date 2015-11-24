@@ -55,6 +55,8 @@ function calculateFreeTimes(range, busy) {
 	free.unshift(1);
 	free.push(1);
 
+	// console.log(free)
+
 	// 02: convert to moments
 	// push busies on either end to avoid this mess:
 	var freeTimeRanges = [];
@@ -79,4 +81,13 @@ function rangeFormat(times) {
 		return c;
 	});
 	return ranges;
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+	// if executing on the node runtime, export...
+	module.exports.calculate = calculateFreeTimes;
+	module.exports.rangeFormat = rangeFormat;
+	module.exports.length = length;
+	module.exports.braket = braket;
+	module.exports.OR = OR;
 }

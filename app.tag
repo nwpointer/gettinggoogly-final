@@ -9,7 +9,8 @@
 	<div show={(state.authenticated)}>
 		<h3>Date Range</h3>
 		<input name="daterange">
-		<h3>Calandars</h3>
+		<h3>Calandars <a class="btn btn-secondary btn-sm" onclick={toggleAll}>toggle</a></h3>
+		
 		<ul>
 			<li each={state.calendars}>
 				<input onchange={updateCalandarStatus} type="checkbox" checked={ enabled }> {title}
@@ -80,6 +81,7 @@
 		}
 
 		toggleAll = function(){
+			console.log('toggle')
 			state.calandars = state.calendars.map(function(v){
 				v.enabled=!v.enabled
 				return v;
@@ -160,7 +162,7 @@
 			state.freetimes = rangeFormat(calculateFreeTimes(range, busy));
 
 		}
-
+ 
 		formatGoogleDateRange= function(range){
 			return {
 				start: range.start.dateTime,
