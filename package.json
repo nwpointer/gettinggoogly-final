@@ -1,0 +1,31 @@
+{
+  "name": "jsfreetimecalculator",
+  "version": "1.0.0",
+  "description": "calculates free times",
+  "main": "na",
+  "dependencies": {
+    "moment": "^2.10.6",
+    "bootstrap": "^3.3.5",
+    "daterangepicker": "^0.0.3",
+    "jquery": "^2.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwpointer/proj6-Gcal.git"
+  },
+  "author": "Nathan Pointer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nwpointer/proj6-Gcal/issues"
+  },
+  "homepage": "https://github.com/nwpointer/proj6-Gcal#readme",
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}

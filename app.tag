@@ -1,4 +1,5 @@
 <App>
+	<!-- basic template, compiled into dom at runtime -->
 	<div show={(!state.authenticated)}>
 		<span>Authorize access to Google Calendar API</span>
 		{bar}
@@ -20,10 +21,16 @@
 				{start.dateTime} - {end.dateTime}	
 			</li>
 		</ul>
+		<h3>Free Times</h3>
+		<ul>
+			<li each={state.freetimes}>
+				{start} - {end}	
+			</li>
+		</ul>
 	</div>
 
+	<!-- logic defining state transitions -->
 	<script>
-		// INITIALIZATION
 		
 		self = this;
 		// state is mutable and normalized
@@ -32,6 +39,7 @@
 			calendars: [],
 			calendarsIndexById:{},
 			events:[],
+			freetimes:[],
 			startDate:moment(),
 			endDate:moment().add(7,'d')
 		} 
@@ -63,8 +71,7 @@
 
 		updateCalandarStatus(e){
 			e.item.enabled = e.srcElement.checked
-			// getAllEvents();
-			// self.update();
+			calculateFree();
 		}
 
 		isBusy = function(event){
@@ -130,34 +137,36 @@
 		listEvents = function(cId){
 			min = state.startDate.format("YYYY-MM-DDTHH:mm:ss") + '.000Z';
 			max = state.endDate.format("YYYY-MM-DDTHH:mm:ss") + '.000Z';
-			console.log('start:', min,'end:',max)
-			console.log('2011-06-03T10:00:00.000Z')
 			var request = gapi.client.calendar.events.list({
 				timeMin: min,
 				timeMax: max,
 				"singleEvents" : true,
 				"orderBy" : "startTime",
-				calendarId:cId
+				calendarId: cId
 			});
 
 			request.execute(function(resp){
-				// console.log(resp);
-				console.log(resp.items.map(function(v){
-					return v
-					return v.start.dateTime
-				}))
 				state.events = state.events.concat(resp.items.map(function(v){
 				  return {start: v.start, end:v.end, cId:cId}
 				}));
-				// console.log(foo);
-				// state.events = state.events.concat(foo);
+				// console.log(state.events, state.startDate, state.endDate);		
 				self.update();
 		  })
 		}
 
-		// $(document).ready(function() {
-		//   $('input[name="daterange"]').daterangepicker();
-		// });
+		calculateFree = function(){
+			range = {start:state.startDate.format(), end: state.endDate.format()}
+			busy = state.events.filter(isBusy).map(formatGoogleDateRange);
+			state.freetimes = rangeFormat(calculateFreeTimes(range, busy));
+
+		}
+
+		formatGoogleDateRange= function(range){
+			return {
+				start: range.start.dateTime,
+				end:   range.end.dateTime
+			}
+		}
 
 	</script>
 
