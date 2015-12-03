@@ -1,13 +1,7 @@
 var assert = require('assert');
-free = require('../dist/calculateFreeTimes.js')
-// describe('Array', function() {
-//   describe('#indexOf()', function () {
-//     it('should return -1 when the value is not present', function () {
-//       assert.equal(-1, [1,2,3].indexOf(5));
-//       assert.equal(-1, [1,2,3].indexOf(0));
-//     });
-//   });
-// });
+var keyGen = require('../dist/keyGen.js');
+var free = require('../dist/calculateFreeTimes.js');
+var MongoClient = require('mongodb').MongoClient;
 
 describe("free time calculater", function(){
 	it('should handle busy times on the begining time range', function () {
@@ -130,3 +124,61 @@ describe("Array(braket) OR",function(){
 	})
 })
 
+
+describe("Database", function(){
+	it('can connect', function(done){
+		MongoClient.connect("mongodb://localhost:27017/meetme", function(err, db) {
+		  if(err) {throw err}
+		  done();
+		});
+	});
+	it('can create meetings', function(done){
+		MongoClient.connect("mongodb://localhost:27017/meetme", function(err, db) {
+		  if(err) {throw err}
+		  var collection = db.collection('meetings');
+		  collection.insert({foo:"bar"}, function(err, res){
+		  	if(err) {throw err}
+		  	done();
+		  })
+		  
+		});
+	});
+	it('can read meetings', function(done){
+		MongoClient.connect("mongodb://localhost:27017/meetme", function(err, db) {
+		  if(err) {throw err}
+		  var collection = db.collection('meetings');
+		  collection.find().toArray(function(err, items) {
+		  	if(err){throw err}
+		  	done();
+		  });
+		  
+		});
+	});
+	it('can update meetings', function(done){
+		MongoClient.connect("mongodb://localhost:27017/meetme", function(err, db) {
+		  if(err) {throw err}
+		  var collection = db.collection('meetings');
+		  collection.update({foo:"bar"}, {$set:{foo:"barz"}}, (function(err, items) {
+		  	if(err){throw err}
+		  	done();
+		  }));
+		});
+	});
+
+	it('can delete meetings', function(done){
+		MongoClient.connect("mongodb://localhost:27017/meetme", function(err, db) {
+		  if(err) {throw err}
+		  var collection = db.collection('meetings');
+		  collection.remove({foo:"barz"}, function(err, res){
+		  	if(err) {throw err}
+		  	done();
+		  })
+		  
+		});
+	});
+	it('can generate unique non incremental key',function(){
+		time = Date.now();
+		id = 1;
+		assert.equal(time+id, keyGen.generate(time, id) )
+	});
+})

@@ -11,7 +11,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": " python3 -m http.server",
+    "start": "python3 -m http.server",
+    "build": "babel src --out-dir dist",
     "test": "mocha"
   },
   "repository": {

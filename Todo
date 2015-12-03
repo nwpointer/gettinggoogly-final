@@ -1,6 +1,23 @@
 Todo
 
-write tests 
+TDD
+write tests:
+
+D can server
+
+D can connect to mongo
+
+D can generate unique non incremental key
+	(docid + time)
+
+D crud
+
+implement tests in user interface
+version controll after each test implemented
+
+document
+
+
 
 
 
