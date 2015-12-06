@@ -1,6 +1,6 @@
 var assert = require('assert');
-var keyGen = require('../dist/keyGen.js');
-var free = require('../dist/calculateFreeTimes.js');
+var keyGen = require('../public/dist/keyGen.js');
+var free = require('../public/dist/calculateFreeTimes.js');
 var MongoClient = require('mongodb').MongoClient;
 
 describe("free time calculater", function(){
@@ -149,6 +149,7 @@ describe("Database", function(){
 		  var collection = db.collection('meetings');
 		  collection.find().toArray(function(err, items) {
 		  	if(err){throw err}
+		  	console.log(items);
 		  	done();
 		  });
 		  

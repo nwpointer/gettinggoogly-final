@@ -1,34 +1,15 @@
-Todo
+only ship:
+{
+	dateRange,
+	busy
+}
 
-TDD
-write tests:
+re calculate freetimes on daterange
 
-D can server
-
-D can connect to mongo
-
-D can generate unique non incremental key
-	(docid + time)
-
-D crud
-
-implement tests in user interface
-version controll after each test implemented
-
-document
+update/delete proposal
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+if keyed,
+load range, hide range, load busy times
 
 
