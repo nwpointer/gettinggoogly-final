@@ -1,4 +1,4 @@
-Architecture:
+##Architecture:
 the architecture consists of three primary components
 
 server.js: 
