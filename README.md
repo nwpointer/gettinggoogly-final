@@ -1,10 +1,10 @@
 ##Architecture:
 the architecture consists of three primary components
 
-server.js: 
+#server.js: 
 node + express server used primarily as a tool for exposing the monogodb over http, serving the client files and communicating with the client via cookies. Cookies are used to avoid asynchronous communication with the client.
 
-for an hello world example of an express server see hello.js
+#for an hello world example of an express server see hello.js
 
 Client (lives in public/components/app.tag) 
 app.tag is a riot component. Riot is a react-like view library with efficient runtime template compilation. React-like view libraries take a state tree and generate a html based representation of that state(state->ui). Changes in the UI are made by modifying the state tree and riot takes care of re-rendering the view into the dom. The has several advantages, first that application state is centralized creating a ‘single source of truth’ for the application. Second developers no longer need to describe all the view changes required to move from some state to any other valid state - they simply describe that a state mutation has occurred and Riot will take care of generating the required ui transitions. 
